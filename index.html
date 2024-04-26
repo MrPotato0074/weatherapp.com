@@ -1,0 +1,32 @@
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Oliver Gorzka">
+    <meta name="description" content="WeatherApp">
+    <title>WeatherApp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper-input" id="wrapper-input">
+        <a href="index.html">
+            <h1>WeatherApp</h1>
+        </a>
+        <input class="weather-input" id="weather-input" type="text" placeholder="enter city name">
+        <button class="weather-button" id="weather-btn">search</button>
+        <div class="weather-output" id="weather-output">
+            <div class="logo" id="logo-output">
+                <img id="logo" src="" alt="">
+            </div>
+            <div class="city-name" id="city-name-output">London</div>
+            <div class="temperature" id="temperature-output">20</div>
+            <div class="description" id="description-output">Showers</div>
+        </div>
+        <div class="error" id="error"></div>
+    </div>
+    <script src="weather.js"></script>
+</body>
+</html>

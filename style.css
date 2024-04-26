@@ -1,0 +1,113 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    font-family: "Montserrat", sans-serif;
+}
+
+ /* before pressing the search button */
+.wrapper-input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 25vw;
+    height: 40vh;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    border-radius: 10px;
+}
+
+.weather-input{
+    width: 70%;
+    height: 10%; 
+    border: none;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 10px;
+}
+
+.weather-button{
+    width: 20%;
+    height: 10%;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    border: none;
+    border-radius: 10px;
+    transition: background .5s;
+    cursor: pointer;
+    
+}
+
+.weather-button:hover{
+    background: #a1c4fd;
+}
+
+
+/* after pressing the search button */
+
+.weather-output{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 60%;
+    width: 100%;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 50%;
+    margin-top: 20px;
+}
+
+
+.city-name,.temperature,.description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 8%;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.city-name{
+    
+    font-size: 40px;
+}
+
+.temperature{
+    font-size: 50px;
+}
+
+.description{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.error{
+    text-align: center;
+    font-size: 25px;
+    width: 70%;
+    height: 10%; 
+    border: none;
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+a{
+    margin: 20px;
+    color: black;
+    text-decoration: none;
+}
