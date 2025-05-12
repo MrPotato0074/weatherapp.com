@@ -9,9 +9,10 @@ const errorOutput = document.getElementById("error");
 const getWeather = () => {
     const apiKey = '75c995f5d7a351cb8a000e1547d5c2e5';
     const inputCity = weatherInput.value.toLowerCase();
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${apiKey}`;
+    const currentWeather = `https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${apiKey}`;
+    const forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${inputCity}&appid=${apiKey}`;
     
-    fetch(apiUrl)
+    fetch(currentWeather)
     .then(response => {
         if (!response.ok) {
             if (response.status === 404) {
@@ -30,23 +31,56 @@ const getWeather = () => {
         const description = data.weather[0].description;
         const iconCode = data.weather[0].icon;
         const iconUrl =  `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
+
         cityNameOutput.innerHTML = cityName;
         temperatureOutput.innerHTML = `${temperature}°C`;
         descriptionOutput.innerHTML = description;
         logoOutput.src = iconUrl;
+
+        document.getElementById("forecast-container").style.display = "block";
         changeCss();
+
+        return fetch(forecast);
+    })
+    .then(response => response.json())
+    .then(forecastData => {
+        const forecastContainer = document.getElementById("forecast-days");
+        forecastContainer.innerHTML = "";
+        const dailyForecasts = forecastData.list.filter(item => {
+            return item.dt_txt.includes("12:00:00");
+        }).slice(0, 3);
+        
+        dailyForecasts.forEach(day => {
+            const date = new Date(day.dt * 1000);
+            const dayName = date.toLocaleDateString("EN-UK", { weekday: "short" });
+            const temp = Math.round(day.main.temp - 273.15);
+            const iconCode = day.weather[0].icon;
+            
+            const dayElement = document.createElement("div");
+            dayElement.className = "forecast-day";
+            dayElement.innerHTML = `
+                <div>${dayName}</div>
+                <img src="https://openweathermap.org/img/wn/${iconCode}.png" alt="${day.weather[0].description}">
+                <div>${temp}°C</div>
+                <div>${day.weather[0].description}</div>
+            `;
+            
+            forecastContainer.appendChild(dayElement);
+        });
     })
     .catch(error => {
         console.error('Error fetching data:', error.message);
         errorOutput.innerHTML = error.message;
+
+        errorOutput.style.display = "block";
     });
 };
 
 const changeCss = () => {
     document.getElementById("weather-output").style.display = "flex";
-    document.getElementById("wrapper-input").style.height = "70vh";
-    document.getElementById("weather-btn").style.height = "15vh";
-    document.getElementById("weather-input").style.height = "4vh";
+    document.getElementById("wrapper-input").style.height = "85vh";
+    document.getElementById("weather-btn").style.height = "45px";
+    document.getElementById("weather-input").style.height = "40px";
 };
 
 weatherBtn.addEventListener("click", () => {
@@ -60,3 +94,6 @@ weatherInput.addEventListener("keypress", (e) => {
         getWeather();
     }
 });
+
+console.log(day.dt);
+
